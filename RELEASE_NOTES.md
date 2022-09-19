@@ -1,2 +1,3 @@
 ## 1.0-SNAPSHOT
-*   Created template for new repositories.
+* Created Account Service REST API.
+* Created unit tests. End-to-end black box tests by hyperskill were passed successfully
