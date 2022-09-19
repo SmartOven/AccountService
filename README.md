@@ -1,6 +1,6 @@
 ## Overview
 REST API for user accounts and user salaries management.  
-Solution to [Account Service](https://hyperskill.org/projects/217) project from 
+Solution to [Account Service](https://hyperskill.org/projects/217) project from [Java Backend Developer](https://hyperskill.org/tracks/12) track at [hyperskill](https://hyperskill.org/)
 
 ## Testing
 1) End-to-end tests via Postman:  
