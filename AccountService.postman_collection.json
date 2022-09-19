@@ -150,7 +150,7 @@
 								},
 								{
 									"key": "username",
-									"value": "johndoe@acme.com",
+									"value": "user@acme.com",
 									"type": "string"
 								}
 							]
@@ -167,8 +167,8 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:28852/api/auth/changepass",
-							"protocol": "http",
+							"raw": "https://localhost:28852/api/auth/changepass",
+							"protocol": "https",
 							"host": [
 								"localhost"
 							],
@@ -187,87 +187,6 @@
 		{
 			"name": "Admin",
 			"item": [
-				{
-					"name": "Add breached passwords",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\"PasswordForJanuary\", \"PasswordForFebruary\", \"PasswordForMarch\", \"PasswordForApril\",\r\n \"PasswordForMay\", \"PasswordForJune\", \"PasswordForJuly\", \"PasswordForAugust\",\r\n \"PasswordForSeptember\", \"PasswordForOctober\", \"PasswordForNovember\", \"PasswordForDecember\"]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:28852/api/admin/breached-password",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "28852",
-							"path": [
-								"api",
-								"admin",
-								"breached-password"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get all breached passwords",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:28852/api/admin/breached-password",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "28852",
-							"path": [
-								"api",
-								"admin",
-								"breached-password"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "Get all users",
 					"request": {
@@ -506,7 +425,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\r\n    {\r\n        \"employee\": \"user@acme.com\",\r\n        \"period\": \"01-2024\",\r\n        \"salary\": 123456\r\n    },\r\n    {\r\n        \"employee\": \"user@acme.com\",\r\n        \"period\": \"02-2024\",\r\n        \"salary\": 123456\r\n    },\r\n    {\r\n        \"employee\": \"user@acme.com\",\r\n        \"period\": \"03-2024\",\r\n        \"salary\": 123456\r\n    }\r\n]",
+							"raw": "[\r\n    {\r\n        \"employee\": \"user@acme.com\",\r\n        \"period\": \"01-2022\",\r\n        \"salary\": 123456\r\n    },\r\n    {\r\n        \"employee\": \"user@acme.com\",\r\n        \"period\": \"02-2022\",\r\n        \"salary\": 123456\r\n    },\r\n    {\r\n        \"employee\": \"user@acme.com\",\r\n        \"period\": \"03-2022\",\r\n        \"salary\": 123456\r\n    }\r\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -532,11 +451,26 @@
 				{
 					"name": "Update salary",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "acc@acme.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "bZPGqH7fTJWW",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"employee\": \"johndoe@acme.com\",\r\n    \"period\": \"01-2021\",\r\n    \"salary\": 123455\r\n}",
+							"raw": "{\r\n    \"employee\": \"user@acme.com\",\r\n    \"period\": \"01-2022\",\r\n    \"salary\": 123455\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -544,8 +478,8 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:28852/api/acct/payments",
-							"protocol": "http",
+							"raw": "https://localhost:28852/api/acct/payments",
+							"protocol": "https",
 							"host": [
 								"localhost"
 							],
@@ -567,7 +501,7 @@
 							"basic": [
 								{
 									"key": "username",
-									"value": "user@google.com",
+									"value": "user@acme.com",
 									"type": "string"
 								},
 								{
@@ -580,8 +514,8 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:28852/api/empl/payment?period=01-2021",
-							"protocol": "http",
+							"raw": "https://localhost:28852/api/empl/payment?period=01-2022",
+							"protocol": "https",
 							"host": [
 								"localhost"
 							],
@@ -594,7 +528,7 @@
 							"query": [
 								{
 									"key": "period",
-									"value": "01-2021"
+									"value": "01-2022"
 								}
 							]
 						}
