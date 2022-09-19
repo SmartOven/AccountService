@@ -1,0 +1,684 @@
+{
+	"info": {
+		"_postman_id": "26e2f1f7-f456-46dd-9b1c-5fb198a03be1",
+		"name": "AccountService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21464207"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"item": [
+				{
+					"name": "Create admin",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"admin\",\r\n   \"lastname\": \"admin\",\r\n   \"email\": \"admin@acme.com\",\r\n   \"password\": \"bZPGqH7fTJWW\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:28852/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "28852",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create accountant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"acc\",\r\n   \"lastname\": \"acc\",\r\n   \"email\": \"acc@acme.com\",\r\n   \"password\": \"bZPGqH7fTJWW\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:28852/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "28852",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"user\",\r\n   \"lastname\": \"user\",\r\n   \"email\": \"user@acme.com\",\r\n   \"password\": \"bZPGqH7fTJWW\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:28852/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "28852",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create auditor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"auditor\",\r\n   \"lastname\": \"auditor\",\r\n   \"email\": \"auditor@acme.com\",\r\n   \"password\": \"bZPGqH7fTJWW\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:28852/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "28852",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Change user password",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "bZPGqH7fTJWW",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "johndoe@acme.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"new_password\": \"bZPGqH7fTJWW\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:28852/api/auth/changepass",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "28852",
+							"path": [
+								"api",
+								"auth",
+								"changepass"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Add breached passwords",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\"PasswordForJanuary\", \"PasswordForFebruary\", \"PasswordForMarch\", \"PasswordForApril\",\r\n \"PasswordForMay\", \"PasswordForJune\", \"PasswordForJuly\", \"PasswordForAugust\",\r\n \"PasswordForSeptember\", \"PasswordForOctober\", \"PasswordForNovember\", \"PasswordForDecember\"]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:28852/api/admin/breached-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "28852",
+							"path": [
+								"api",
+								"admin",
+								"breached-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all breached passwords",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:28852/api/admin/breached-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "28852",
+							"path": [
+								"api",
+								"admin",
+								"breached-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin@acme.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "bZPGqH7fTJWW",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:28852/api/admin/user",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "28852",
+							"path": [
+								"api",
+								"admin",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin@acme.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "bZPGqH7fTJWW",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:28852/api/admin/user/user@acme.com",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "28852",
+							"path": [
+								"api",
+								"admin",
+								"user",
+								"user@acme.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Grant role Accountant",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin@acme.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "bZPGqH7fTJWW",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"user\": \"acc@acme.com\",\r\n   \"role\": \"ACCOUNTANT\",\r\n   \"operation\": \"GRANT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:28852/api/admin/user/role",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "28852",
+							"path": [
+								"api",
+								"admin",
+								"user",
+								"role"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lock user",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin@acme.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "bZPGqH7fTJWW",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"user\": \"user@acme.com\",\r\n   \"operation\": \"LOCK\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:28852/api/admin/user/access",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "28852",
+							"path": [
+								"api",
+								"admin",
+								"user",
+								"access"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Grant role Auditor",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin@acme.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "bZPGqH7fTJWW",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"user\": \"auditor@acme.com\",\r\n   \"role\": \"AUDITOR\",\r\n   \"operation\": \"GRANT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:28852/api/admin/user/role",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "28852",
+							"path": [
+								"api",
+								"admin",
+								"user",
+								"role"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Salary",
+			"item": [
+				{
+					"name": "Create salary",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "acc@acme.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "bZPGqH7fTJWW",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"employee\": \"user@acme.com\",\r\n        \"period\": \"01-2024\",\r\n        \"salary\": 123456\r\n    },\r\n    {\r\n        \"employee\": \"user@acme.com\",\r\n        \"period\": \"02-2024\",\r\n        \"salary\": 123456\r\n    },\r\n    {\r\n        \"employee\": \"user@acme.com\",\r\n        \"period\": \"03-2024\",\r\n        \"salary\": 123456\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:28852/api/acct/payments",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "28852",
+							"path": [
+								"api",
+								"acct",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update salary",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"employee\": \"johndoe@acme.com\",\r\n    \"period\": \"01-2021\",\r\n    \"salary\": 123455\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:28852/api/acct/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "28852",
+							"path": [
+								"api",
+								"acct",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get salary at period",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "user@google.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "bZPGqH7fTJWW",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:28852/api/empl/payment?period=01-2021",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "28852",
+							"path": [
+								"api",
+								"empl",
+								"payment"
+							],
+							"query": [
+								{
+									"key": "period",
+									"value": "01-2021"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all salaries",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "user@acme.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "bZPGqH7fTJWW",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:28852/api/empl/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "28852",
+							"path": [
+								"api",
+								"empl",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Security",
+			"item": [
+				{
+					"name": "Get logs",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "auditor@acme.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "bZPGqH7fTJWW",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:28852/api/security/events",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "28852",
+							"path": [
+								"api",
+								"security",
+								"events"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
