@@ -12,7 +12,6 @@ import account.model.user.UserService;
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        // fixme: handle the error
         User user = userService.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
         return new UserDetailsImpl(user);

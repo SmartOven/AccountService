@@ -1,71 +1,40 @@
 package account.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import account.exception.handler.UnauthorizedHandler;
 import account.pojo.enums.Role;
 import account.userdetails.UserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
-// FIXME
-//  Replace userDetailsService bean implementation with the real UserDetailsService
-//  Resolve what to do with filterChain bean
-
-//@Configuration
-//@EnableWebSecurity
-//public class SecurityConfiguration {
-//
-//    @Bean
-//    public UserDetailsService userDetailsService(@Autowired BCryptPasswordEncoder bCryptPasswordEncoder) {
-//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-//        manager.createUser(User.withUsername("user")
-//                .password(bCryptPasswordEncoder.encode("userPass"))
-//                .roles("USER")
-//                .build());
-//        manager.createUser(User.withUsername("admin")
-//                .password(bCryptPasswordEncoder.encode("adminPass"))
-//                .roles("USER", "ADMIN")
-//                .build());
-//        return manager;
-//    }
-//
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeHttpRequests((authz) -> authz
-//                        .anyRequest().authenticated()
-//                )
-//                .httpBasic(withDefaults());
-//        return http.build();
-//    }
-//}
-
+@Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("admin")
-                .password(encoder.encode("admin"))
-                .roles(Role.ADMINISTRATOR.name())
-                .and()
-                .passwordEncoder(encoder);
-        auth
-                .userDetailsService(service)
-                .passwordEncoder(encoder);
+public class SecurityConfiguration {
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return userDetailsService;
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic().authenticationEntryPoint(unauthorizedHandler) // handle auth errors
+    @Bean
+    public DaoAuthenticationProvider authProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(encoder);
+        return authProvider;
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.httpBasic().authenticationEntryPoint(unauthorizedHandler)// handle auth errors
                 .and()
                 .csrf().disable().headers().frameOptions().disable() // for Postman, the H2 console
                 .and()
@@ -83,20 +52,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(accessDeniedHandler); // handle Access denied errors
+        return http.build();
     }
 
     public SecurityConfiguration(@Autowired UserDetailsServiceImpl userDetailsService,
-                                 @Autowired PasswordEncoder encoder,
+                                 @Autowired BCryptPasswordEncoder encoder,
                                  @Autowired UnauthorizedHandler unauthorizedHandler,
                                  @Autowired AccessDeniedHandler accessDeniedHandler) {
-        this.service = userDetailsService;
+        this.userDetailsService = userDetailsService;
         this.encoder = encoder;
         this.unauthorizedHandler = unauthorizedHandler;
         this.accessDeniedHandler = accessDeniedHandler;
     }
 
-    private final UserDetailsService service;
-    private final PasswordEncoder encoder;
+    private final UserDetailsService userDetailsService;
+    private final BCryptPasswordEncoder encoder;
     private final UnauthorizedHandler unauthorizedHandler;
     private final AccessDeniedHandler accessDeniedHandler;
 }
