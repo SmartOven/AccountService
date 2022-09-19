@@ -1,6 +1,8 @@
 package account.exception.handler;
 
+import account.pojo.exception.ApiResponseErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,7 +21,7 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
     public void handle(
             HttpServletRequest request,
             HttpServletResponse response,
-            AccessDeniedException exc) throws IOException {
+            AccessDeniedException exception) throws IOException {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
@@ -32,8 +34,12 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
             );
         }
 
-        // FIXME no response body
-        response.sendError(HttpServletResponse.SC_FORBIDDEN, "Access Denied!");
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        response.setContentType("application/JSON");
+        String body = ApiResponseErrorMessage
+                .generate(HttpStatus.FORBIDDEN, exception, request)
+                .toJsonString();
+        response.getOutputStream().println(body);
     }
 
     public AccessDeniedHandlerImpl(@Autowired Logger logger) {
